@@ -1,0 +1,71 @@
+/*
+****************************************************
+** Tips for running matrix multiplication program **
+****************************************************
+*/
+
+In order that *.o files are well compiled, type command:
+  $ make all
+in your terminal.
+If you want to clean these *.o files, type
+  $ make clean
+
+Once compilation is well done, type in terminal :
+  $ ./run.sh PATH
+where "PATH" is the path of hosts file containing nodes.
+This parameter is exactly what we use in command:
+  $ mpirun -np N -f PATH CODE
+
+NOTE: Please execute run.sh in the folder of source code.
+
+When run.sh is run, it will give instructions for further
+settings such as number of process, range of primes, etc.
+
+Here is an example:
+
+parallels@node1:/media/psf/project/Matrix_z$ make all
+	mpicc matrix.c -lm -o matrix.o
+	mpicc matrixUp.c -lm -o matrixUp.o
+	mpicc naive.c -lm -o naive.o
+	Compile completed.
+	chmod a+x ./run.sh     
+            
+parallels@node1:/media/psf/project/Matrix_z$ ./run.sh /home/parallels/mpich-install/hostfile
+	[0/1 required]Need general matrix multiplication:
+	0--square case, 1--general case.
+	1
+	General matrix multiplication confirmed.
+	[Three positive integers required]Please set matrices size:
+	Example: input [M N S] will calculate MxN matrix multiplied NxS matrix.
+	M N S:6 5 4
+	[One positive integer required]Please set process number:
+	4
+	Divisible case confirmed.
+	Warning: Permanently added 'node3,10.37.129.10' (ECDSA) to the list of known hosts.
+	Warning: Permanently added 'node2,10.37.129.9' (ECDSA) to the list of known hosts.
+	Start calculating matrix(6x6) multiplication with 4 process.
+	------A------
+	4.708847 8.833886 5.048370 3.619696 3.227752 
+	0.102195 1.147810 8.979902 4.568815 0.435055 
+	9.183827 9.516273 0.410355 2.085871 0.773432 
+	7.433842 0.538675 6.122676 9.956074 8.526952 
+	3.265047 4.399943 0.517609 0.357356 3.632991 
+	5.328617 2.411496 2.369609 8.090079 6.433080 
+
+	------B------
+	7.664404 2.798927 5.266966 2.712775 
+	6.418622 8.494718 2.814970 7.566432 
+	7.474621 7.383785 8.001487 6.658448 
+	6.900057 8.411842 8.744319 7.673489 
+	5.845685 9.282994 3.796165 5.801758 
+
+	------C------
+	174.371062 185.908676 133.967784 159.731674 
+	109.340269 118.812790 117.224594 106.337103 
+	153.451036 134.298660 99.617979 120.143377 
+	224.741550 233.495762 209.089460 190.878837 
+	80.838239 87.067875 50.640513 69.415582 
+	167.458849 180.666783 148.977595 147.881979 
+
+	Calculated in 0.053176.
+
