@@ -56,7 +56,7 @@ if [ ! -e $code ]
 fi
 
 mult=0
-if [ -e $hosts ]
+if [ -e "$hosts" ]
   then
   mult=1
 else
